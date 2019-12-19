@@ -45,11 +45,10 @@ def is_correct_resultcsv():
 
 def extract_imei(list, mode):
     ret_list = []
-    imei_index = 999
+    # imei_index = 999
     logger.info("csvの内容からIMEIのみを抽出")
     # 各csvのIMEI絡むのインデックス
     if mode == "result":
-        global imei_index
         imei_index = 4
     elif mode == "license":
         imei_index = 2

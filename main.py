@@ -4,6 +4,7 @@ import os
 import makelist
 import datetime
 import shutil
+import subprocess
 import checkoutputcsv
 import logging
 from logging import getLogger, StreamHandler, FileHandler, Formatter
@@ -54,9 +55,6 @@ if __name__ == "__main__":
         os.mkdir('output\\' + 'IMEI一覧')
     # 必要ファイルをコピー
     shutil.copy('.\\output\\IMEI一覧.csv', '.\\output\\IMEI一覧\\IMEI一覧.csv')
-    # フォルダをzip
-    shutil.make_archive('.\\output\\IMEI一覧', 'zip', root_dir='.\\output\\')
-
 
     # Gdriveに配置用のディレクトリ作成
     date_str = datetime.datetime.today().strftime('%Y%m%d')
@@ -67,6 +65,13 @@ if __name__ == "__main__":
     shutil.copy('.\\res\\license_info.csv', '.\\output\\' + date_str + '\\license_info_' + date_str + '.csv')
     prod_file_name = get_prod_csvfilename()
     shutil.copy('.\\res\\' + prod_file_name, '.\\output\\' + date_str + '\\' + prod_file_name[0:-4] + '_' + date_str + '.csv')
+
+    # フォルダをzip
+    os.chdir('output')
+    subprocess.call(r'"C:\Program Files\7-Zip\7z.exe" a -pjesnec IMEI一覧.zip IMEI一覧', shell=True)
+    shutil.rmtree('IMEI一覧')
+    os.remove('IMEI一覧.csv')
+    os.chdir('../')
 
     logger.info("==========logic end==========")
 
