@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     # フォルダをzip
     os.chdir('output')
-    subprocess.call(r'"C:\Program Files\7-Zip\7z.exe" a -pjesnec IMEI一覧.zip IMEI一覧', shell=True)
+    subprocess.call(r'"C:\Program Files\7-Zip\7z.exe" a IMEI一覧.zip IMEI一覧', shell=True)
     shutil.rmtree('IMEI一覧')
     os.remove('IMEI一覧.csv')
     os.chdir('../')
